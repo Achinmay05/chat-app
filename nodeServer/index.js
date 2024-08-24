@@ -1,6 +1,11 @@
 // node server which will handle socket io connections
-const io = require('socket.io')(8000, { cors: { origin: "*" } });
+require('dotenv').config();
+const io = require('socket.io')(process.env.PORT, { cors: { origin: "*" } });
 const users = {};
+
+
+    console.log(`Server is running on port ${process.env.PORT}`);
+
 
 io.on('connection', socket => {
     // when new user joins
@@ -21,3 +26,4 @@ io.on('connection', socket => {
         delete users[socket.id];
     })
 })
+
